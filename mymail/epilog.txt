@@ -1,0 +1,6 @@
+Hints:
+    - filtering on mbox or account simply uses startswith().
+      To filter Mailboxes OUTBOX you can use `--m OU`.
+ 
+    - Accounts of Mailboxes are UUIDs. This program displays UUID truncated
+      after 8 Bytes.

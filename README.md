@@ -56,7 +56,7 @@ Hints:
     - filtering on mbox or account simply uses startswith().
       To filter Mailboxes OUTBOX you can use `--m OU`.
 
-    - Accounts of Mailboxes are UUIDs. This program displays UUID truncated
+    - Accounts of Mailboxes are UUIDs. This program displays UUIDs truncated
       after 8 Bytes.
 ```
 ### Beispiel: Analyse eines Accounts
@@ -79,16 +79,37 @@ repositories/mymail  % python -m mymail -a 6555
 
  - Die Spalten *Index* und *Files* zeigen je die Anzahl Messages im Index und im Verzeichnisbaum an. Diese beiden Zahlen sollten übereinstimmen.
 
- - Die Spalte *KB %* zeigt an, wie hoch der Anteil der Mailbox am Speicherverbrauch aller Mailboxen annimmt. Der Speicherbrauch wird über du ermittelt, weil viele elmx-Files COMPRESSED sind; es wird also der physische Speicherverbrauch verwendet, nicht die logische Größe der emlx-Files.
+ - Die Spalte *KB %* zeigt an, wie hoch der Anteil der Mailbox am Speicherverbrauch aller Mailboxen annimmt. Der Speicherbrauch wird über `du` ermittelt, weil viele elmx-Files COMPRESSED sind; es wird also der physische Speicherverbrauch verwendet, nicht die logische Größe der emlx-Files.
 
- - Die Monster-Spalte zwigt die Anzahl der Mismatches zwischen Index und Files an.
+ - Die Monster-Spalte zeigt die Anzahl der Mismatches zwischen Index und Files an.
  - Die Summenzeile zeigt bei *KB %* den Speicherverbrauch alle Mailboxen, also ungefiltert an, ebenso ist dort die Monsterspalte ungefiltert.
 
 ### Beispiel: Anzeige der der verwaisten emlx-Files
 
-Mit der Option `-mi` werden die Namen der verweisten emlx-Files angezeigt. Mit -v werden dazu noch Subject und Sendedatum angezeigt.  
+Mit der Option `-mi` werden die Namen der verwaisten emlx-Files angezeigt. Mit -v werden dazu noch Subject und Sendedatum angezeigt.  
 ```
 repositories/mymail  % python -m mymail -a 6555 --mi -v
 ``` 
 
+## Wie erfolgt die Bereinigung?
 
+`mymail` ist read-only.
+
+### Offizieller Weg
+Wenn man einen Mismatch in einer Mailbox gefunden hat, kann man in der Mail-App
+
+1. die Mailbox markieren
+2. im Menu *Mailbox* den Menubefehl *Rebuild* ausführen.
+
+Das hilft in der Regel.
+
+### Etwas härter
+Sind dann noch verwaiste emlx-Files übrig, können diese manuell über Finder oder Terminal mit `rm` (oder `trash`) gelöscht werden.
+
+### Ganz radikal
+Eine radikale Methode wäre dann noch das Löschen von ~/Library/Mail:
+
+1. Falls vorhanden: Export der lokalen Mailboxen bei `On my Mac` oder der POP-Mailboxes!
+2. Rename ~/Library/Mail nach ~/Library/manweisjanie
+3. Start der Mail-App. Die baut nun ohne Murren ~/Library/Mail aus den IMAP-Servern wieder auf. Das dauert je nach Datenmenge ein paar Minuten.
+4. Wenn im ersten Schritt etwas exportiert wurde, dieses nun wieder importieren. 
