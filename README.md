@@ -3,8 +3,8 @@ Analyzing macOS Mail ~/Library/Mail/
 ## Vorwort
 Ausgangspunkt für dieses Projekt war die Feststellung, dass ~/Library/Mail auf meinem Mac auf über 2GB angewachsen war. Dies stand in keinem Verhältnis zu den Größen, die die Provider meiner E-Mail-Accounts anzeigten.
 
-Der Mail-Ordner enthält eines sqlite-Datenbank mit einem Index der empfangenen, gesendeten und noch zu sendenden E-Mails. Die eigentlichen E-Mails sind als eigene emlx-Dateien in einem Verzeichnisbaum gespeichert, der die Mailboxen widerspiegelt.
-Der Verzeichnisbaum kann man mit dem Finder oder vom Terminal nach emlx-Files durchsuchen:
+Der Mail-Ordner enthält eines sqlite-Datenbank mit einem Index der empfangenen, gesendeten und noch zu sendenden E-Mails. Die eigentlichen E-Mails sind als emlx-Dateien in einem Verzeichnisbaum gespeichert, der die Mailboxen widerspiegelt.
+Den Verzeichnisbaum kann man mit dem Finder oder vom Terminal nach emlx-Files durchsuchen:
 
 ```
 ~/Library/Mail  % print -l ./**/github*/**/*.emlx
@@ -51,13 +51,7 @@ options:
   -p, --print id [id ...]
                         print individual ids
   -v                    show more detail
-
-Hints:
-    - filtering on mbox or account simply uses startswith().
-      To filter Mailboxes OUTBOX you can use `--m OU`.
-
-    - Accounts of Mailboxes are UUIDs. This program displays UUIDs truncated
-      after 8 Bytes.
+...
 ```
 ### Beispiel: Analyse eines Accounts
 
@@ -79,7 +73,7 @@ repositories/mymail  % python -m mymail -a 6555
 
  - Die Spalten *Index* und *Files* zeigen je die Anzahl Messages im Index und im Verzeichnisbaum an. Diese beiden Zahlen sollten übereinstimmen.
 
- - Die Spalte *KB %* zeigt an, wie hoch der Anteil der Mailbox am Speicherverbrauch aller Mailboxen annimmt. Der Speicherbrauch wird über `du` ermittelt, weil viele elmx-Files COMPRESSED sind; es wird also der physische Speicherverbrauch verwendet, nicht die logische Größe der emlx-Files.
+ - Die Spalte *KB %* zeigt an, wie hoch der Anteil der Mailbox am Speicherverbrauch aller Mailboxen annimmt. Der Speicherbrauch wird über `du` ermittelt, weil viele elmx-Files COMPRESSED sind; es wird also der physische Speicherverbrauch verwendet, nicht die logische Größe der emlx-Files. KB ist KiB, also 1KB = 1024 Bytes.
 
  - Die Monster-Spalte zeigt die Anzahl der Mismatches zwischen Index und Files an.
  - Die Summenzeile zeigt bei *KB %* den Speicherverbrauch alle Mailboxen, also ungefiltert an, ebenso ist dort die Monsterspalte ungefiltert.
