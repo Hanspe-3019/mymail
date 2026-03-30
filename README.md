@@ -31,7 +31,10 @@ repositories/mymail  % python -m mymail -h
 
 Das zeigt die Hilfe an:
 ```
-usage: mymail [-h] [-a `account`] [-m `mbox`] [--mi] [--me] [--le [`n`]] [--la [`n`]] [-p id [id ...]] [-v]
+usage: mymail [-h] [-i] [-e] [-L [`n`]] [-A [`n`]]
+              [-p id [id ...]]
+              [--account `account`] [--mbox `mbox`]
+              [-v]
 
 Checks macOS Mail database in ~/Library/Mail
 
@@ -42,22 +45,22 @@ Checks macOS Mail database in ~/Library/Mail
 
 options:
   -h, --help            show this help message and exit
-  -a `account`          filter by account.
-  -m `mbox`             filter by mbox.
-  --mi                  show emlx missing entry in index optionally filtered by mbox.
-  --me                  show messages missing emlx-file optionally filtered by mbox
-  --le [`n`]            show top largest emlx
-  --la [`n`]            show top largest attachments
+  -i, --index-missing   show emlx missing entry in index optionally filtered.
+  -e, --emlx-missing    show messages missing emlx-file optionally filtered
+  -L [`n`]              show top largest emlx
+  -A [`n`]              show top largest attachments
   -p, --print id [id ...]
                         print individual ids
-  -v                    show more detail
+  --account `account`   filter overview and searches by account.
+  --mbox `mbox`         filter searches by mbox.
+  -v                    show more details
 ...
 ```
 ### Beispiel: Analyse eines Accounts
 
-Option -a ist optional:
+Option `--mbox` ist optional:
 ```
-repositories/mymail  % python -m mymail -a 6555
+repositories/mymail  % python -m mymail --mbox 6555
 ```
 
 ```
@@ -80,10 +83,10 @@ repositories/mymail  % python -m mymail -a 6555
 
 ### Beispiel: Anzeige der der verwaisten emlx-Files
 
-Mit der Option `-mi` werden die Namen der verwaisten emlx-Files angezeigt. Mit -v werden dazu noch Subject und Sendedatum angezeigt.  
+Mit der Option `-i` werden die Namen der verwaisten emlx-Files angezeigt. Mit  `-v` werden dazu noch Subject und Sendedatum angezeigt.  
 ```
-repositories/mymail  % python -m mymail -a 6555 --mi -v
-``` 
+repositories/mymail  % python -m mymail -iv --mbox 6555
+```
 
 ## Wie erfolgt die Bereinigung?
 

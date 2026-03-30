@@ -1,6 +1,5 @@
 from urllib.parse import urlparse
 from urllib.parse import unquote
-from collections import defaultdict
 
 from . consts import CON
 
