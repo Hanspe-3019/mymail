@@ -64,14 +64,17 @@ repositories/mymail  % python -m mymail --mbox 6555
 ```
 
 ```
- Overview Mailboxes                                       Index   Files  KB %   👹
-65558C10/Archive                                            136     136  11.4
-65558C10/INBOX                                                0       2   0.5    2
-65558C10/Sent Messages                                      222     222   9.6
-65558C10/github-notifications                                 2       2   0.1
-                                                      𝚺     360     362 19884    6
+ Overview Mailboxes                                Index   Files  KB %   👹
 
-👹 emlx-Files w/o Index : 6
+65558C10  -  imap   iCloud
+ ↳ Archive                                           136     136  11.1
+ ↳ Deleted Messages                                    1       1   0.1
+ ↳ INBOX                                               0       2   0.4    2
+ ↳ Sent Messages                                     223     223   9.4
+ ↳ github-notifications                                2       2   0.1
+
+All Accounts                                   𝚺    1062    1067 20500    5
+...
 ```
 
  - Die Spalten *Index* und *Files* zeigen je die Anzahl Messages im Index und im Verzeichnisbaum an. Diese beiden Zahlen sollten übereinstimmen.
@@ -79,7 +82,7 @@ repositories/mymail  % python -m mymail --mbox 6555
  - Die Spalte *KB %* zeigt an, wie hoch der Anteil der Mailbox am Speicherverbrauch aller Mailboxen annimmt. Der Speicherbrauch wird über `du` ermittelt, weil viele elmx-Files COMPRESSED sind; es wird also der physische Speicherverbrauch verwendet, nicht die logische Größe der emlx-Files. KB ist KiB, also 1KB = 1024 Bytes.
 
  - Die Monster-Spalte zeigt die Anzahl der Mismatches zwischen Index und Files an.
- - Die Summenzeile zeigt bei *KB %* den Speicherverbrauch alle Mailboxen, also ungefiltert an, ebenso ist dort die Monsterspalte ungefiltert.
+ - Die Summenzeile zeigt die Summen aller Mailboxen, also ungefiltert, an.
 
 ### Beispiel: Anzeige der der verwaisten emlx-Files
 

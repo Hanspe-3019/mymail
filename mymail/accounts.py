@@ -1,4 +1,8 @@
-'''
+''' Über osascript entlocken wir Mail die Namen der Accounts.
+Dies wird gemischt mit dem  Schema der Mailbox-URLs aus dem Index.
+
+In dem info-Dictionary sind nur die Mailboxen enthalten, die im Index
+vorkommen.
 '''
 import subprocess
 import json
@@ -22,27 +26,16 @@ def info_accounts() -> dict:
 
     return json.loads(proc.stdout)
 
-def print_account_info(shiftby=8) -> str:
+def get_account_info() -> dict:
 
-    shift = ' '*shiftby if shiftby > 0 else ''
-    print('Account Info:')
+    info = {}
     schemas = MSG.account_info()
     for a_id, name in sorted( info_accounts().items()):
         account = a_id[:8]
         schema = schemas[account]
-        print(
-            f'{shift}'
-            f'{account} ' 
-            f'{schema:5s} '
-            f'{name}' 
-        )
+        info[account] = f'{schema:5s}  {name}'
     for account, schema in schemas.items():
         if schema != 'local':
             continue
-        print(
-            f'{shift}'
-            f'{account} ' 
-            f'{schema:5s} '
-            'On my Mac' 
-        )
-        
+        info[account] = f'{schema:5s}  On my Mac'
+    return info

@@ -2,10 +2,7 @@ from . emlx import EMLX
 from . msg  import MSG
 from . attachments import Attachment
 from . consts import ARGS
-from . accounts import print_account_info
-
-if ARGS.verbose:
-    print_account_info()
+from . accounts import get_account_info
 
 account_filter = ARGS.filter_account if ARGS.filter_account else ''
 mbox_filter = ARGS.filter_mbox if ARGS.filter_mbox else '' 
@@ -28,34 +25,43 @@ def overview():
     monster_1 = '👹' if w_o_indx > 0 else ' '
     monster_2 = '👺' if w_o_emlx > 0 else ' '
     monster = f'{monster_1} {monster_2}'
-    print(f' Overview Mailboxes{v*39}'
+    print(f' Overview Mailboxes{v*32}'
           f'Index{v*3}Files  KB %   {monster}')
     sum_count_emlx = 0
     sum_count_index = 0
 
     total = mboxes_du['total']
 
+    prev_account = ''
+    account_info = get_account_info()
+
     for mbox in sorted( set(mboxes_emlx.keys() ) | mboxes_index.keys()) :
 
         account, mbox_path = mbox.split('/', maxsplit=1)
-        if not account.startswith(account_filter):
-            continue
         count_emlx  = mboxes_emlx.get(mbox, 0)
         count_index = mboxes_index.get(mbox, 0)
         count_no_ix = mboxes_no_ix.get(mbox, 0)
+        sum_count_emlx += count_emlx
+        sum_count_index += count_index
+        if not account.startswith(account_filter):
+            continue
+        if prev_account != account:
+            print(f'\n{account}  -  {account_info[account]}')
+            prev_account = account
+        path_splitted = mbox_path.split('/')
+        indention = (len(path_splitted) - 1) * 2
+        path_indented = f' {" "*indention}↳ {path_splitted[-1]}'
 
         du_size = mboxes_du.get(mbox, 0)
 
         print(
-            f'{mbox:55s} {count_index:7d} {count_emlx:7d}'
+            f'{path_indented:48s} {count_index:7d} {count_emlx:7d}'
             f' {du_size * 100 / total:5.1f}'
             f''' {format(count_no_ix, '4d') if count_no_ix > 0 else v*4 }'''
         )
-        sum_count_emlx += count_emlx
-        sum_count_index += count_index
 
     print(
-        f''' {'𝚺':>54s} {sum_count_index:7d} {sum_count_emlx:7d}'''
+        f'''\nAll Accounts{'𝚺':>36s} {sum_count_index:7d} {sum_count_emlx:7d}'''
         f'''{mboxes_du['total']:6d}'''
         f'{w_o_indx:5d}'
     )
