@@ -8,6 +8,7 @@ import subprocess
 import json
 
 from . msg import MSG
+from . consts import LOGGER
 
 script = '''
 const entries = Application("Mail")
@@ -15,14 +16,21 @@ const entries = Application("Mail")
         acc => [acc.id(), acc.name()]
     );
 JSON.stringify(Object.fromEntries(entries));
-'''.replace('\n', '')
+'''.replace('\n', '').replace('  ','')  
 
 def info_accounts() -> dict:
     runscript = 'osascript -l JavaScript -'
     cmd = f"echo '{script}' | {runscript}"
 
     args = ['zsh', '-c', cmd]
-    proc = subprocess.run(args, capture_output=True, check=True)
+    try:
+        proc = subprocess.run(args, capture_output=True, check=True)
+    except subprocess.CalledProcessError:
+        LOGGER.warning(
+            '🤔 System Settings Privacy&Security Automation for Mail needed?',
+            exc_info=True
+        )
+        return {}
 
     return json.loads(proc.stdout)
 

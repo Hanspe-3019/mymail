@@ -1,6 +1,6 @@
 Checks macOS Mail data base in ~/Library/Mail
 
- - provides overview of count and sizes of email per mail box, 
+ - provides overview of count and sizes of email per mailbox, 
  - reports emails in database missing corresponding emlx-files,
  - reports emlx-files missing corresponding index in database,
  - reports email attachments downloaded from IMAP-Server

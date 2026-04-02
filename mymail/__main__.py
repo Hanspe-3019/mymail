@@ -46,7 +46,7 @@ def overview():
         if not account.startswith(account_filter):
             continue
         if prev_account != account:
-            print(f'\n{account}  -  {account_info[account]}')
+            print(f'\n{account}  -  {account_info.get(account, "?")}')
             prev_account = account
         path_splitted = mbox_path.split('/')
         indention = (len(path_splitted) - 1) * 2

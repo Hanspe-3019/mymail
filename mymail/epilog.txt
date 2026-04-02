@@ -1,7 +1,7 @@
 Hints:
     - filtering on mbox or account simply uses startswith().
-      To filter Mailboxes OUTBOX you can use `--m OU`.
+      To filter Mailboxes OUTBOX you can use `--mbox OU`.
  
-    - Accounts of Mailboxes are UUIDs. In oder to improve readability, 
+    - Ids of Accounts and Mailboxes are UUIDs. In oder to improve readability, 
       here these UUIDs are displayed truncated to first 8 Bytes.
 

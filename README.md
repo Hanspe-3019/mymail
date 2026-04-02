@@ -19,14 +19,35 @@ Ich fand nun große emlx-Files, die in der Mail-App nicht zu sehen und zu finden
 
 In der Folge startete ich dieses Python-Projekt.
 
-## Aufruf der Analyse
-
-1. Es ist eine Terminal-Anwendung,
-2. Die Terminal-App braucht **Full Disk Access** für den Zugriff auf den Mail-Ordner.
-3. Das Programm ist ein Python Package.
+## Installation
 
 ```
-repositories/mymail  % python -m mymail -h
+mymail
+├── mymail
+│   ├── __init__.py
+│   ├── __main__.py
+│   ├── accounts.py
+│   ├── attachments.py
+│   ├── consts.py
+│   ├── description.txt
+│   ├── du.py
+│   ├── emlx.py
+│   ├── epilog.txt
+│   ├── msg.py
+│   └── options.py
+└── README.md
+```
+
+1. Es ist eine Terminal-Anwendung,
+2. Das Programm ist ein Python Package. Wenn es nicht mit pip ins Python-System installiert wird, erfolgt der Aufruf aus dem Verzeichnis, in dem sich die README.md befindet.
+3. Die Terminal-App braucht **Full Disk Access** für den Zugriff auf den Mail-Ordner.
+4. Die Terminal-App braucht die Erlaubnis zur **Automatisierung von Mail**: System Settings -> Privacy & Security -> Automation
+
+## Aufruf der Analyse
+
+
+```
+repos/mymail  % python -m mymail -h
 ```
 
 Das zeigt die Hilfe an:
